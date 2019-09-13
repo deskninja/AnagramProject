@@ -13,7 +13,7 @@ public class Anagram {
 	 * @return true iff {@code s1} and {@code s2} are anagrams of each other
 	 */
 
-	public static boolean areAnagrams(String s1, String s2) {
+	public boolean areAnagrams(String s1, String s2) {
 		return false;
 	}
 
@@ -27,7 +27,7 @@ public class Anagram {
 	 * @param filename file to read strings from
 	 * @return largest group of anagrams in the input file
 	 */
-	public static List<String> getLargestAnagramGroup(String filename) {
+	public List<String> getLargestAnagramGroup(String filename) {
 		return null;
 	}
 
@@ -41,7 +41,7 @@ public class Anagram {
 	 * 
 	 * @modifies {@code list}
 	 */
-	public static <T> void insertionSort(List<T> list, Comparator<? super T> order) {
+	public <T> void insertionSort(List<T> list, Comparator<? super T> order) {
 
 	}
 
@@ -53,7 +53,7 @@ public class Anagram {
 	 * @param str string to be sorted
 	 * @return sorted string
 	 */
-	public static String sort(String str) {
+	public String sort(String str) {
 		return null;
 	}
 	
@@ -64,12 +64,9 @@ public class Anagram {
 	 * @param input list of strings
 	 * @return largest group of anagrams in {@code input}
 	 */
-	public static List<String> getLargestAnagramGroup(List<String> input) {
+	public List<String> getLargestAnagramGroup(List<String> input) {
 		
 		return null;
-	}
-	public static void main(String[] args) {
-
 	}
 
 }
