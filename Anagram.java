@@ -3,6 +3,10 @@ package assignment04;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author Jonathan Oliveros and Joshua Wells
+ *
+ */
 public class Anagram {
 
 	/**
@@ -13,7 +17,7 @@ public class Anagram {
 	 * @return true iff {@code s1} and {@code s2} are anagrams of each other
 	 */
 
-	public boolean areAnagrams(String s1, String s2) {
+	public static boolean areAnagrams(String s1, String s2) {
 		return false;
 	}
 
@@ -27,7 +31,7 @@ public class Anagram {
 	 * @param filename file to read strings from
 	 * @return largest group of anagrams in the input file
 	 */
-	public List<String> getLargestAnagramGroup(String filename) {
+	public static List<String> getLargestAnagramGroup(String filename) {
 		return null;
 	}
 
@@ -41,7 +45,7 @@ public class Anagram {
 	 * 
 	 * @modifies {@code list}
 	 */
-	public <T> void insertionSort(List<T> list, Comparator<? super T> order) {
+	public static <T> void insertionSort(List<T> list, Comparator<? super T> order) {
 
 	}
 
@@ -53,7 +57,7 @@ public class Anagram {
 	 * @param str string to be sorted
 	 * @return sorted string
 	 */
-	public String sort(String str) {
+	public static String sort(String str) {
 		return null;
 	}
 	
@@ -64,9 +68,8 @@ public class Anagram {
 	 * @param input list of strings
 	 * @return largest group of anagrams in {@code input}
 	 */
-	public List<String> getLargestAnagramGroup(List<String> input) {
+	public static List<String> getLargestAnagramGroup(List<String> input) {
 		
 		return null;
 	}
-
 }
