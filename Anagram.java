@@ -4,6 +4,9 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Anagram {
+	
+	
+	Comparator<String> sort = (s1, s2) -> {return s1.compareTo(s2);};
 
 	/**
 	 * Reports whether the two input strings are anagrams of each other. *
