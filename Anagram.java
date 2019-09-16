@@ -3,10 +3,6 @@ package assignment04;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @author Jonathan Oliveros and Joshua Wells
- *
- */
 public class Anagram {
 
 	/**
@@ -18,7 +14,15 @@ public class Anagram {
 	 */
 
 	public static boolean areAnagrams(String s1, String s2) {
-		return false;
+		if (s1.length() != s2.length())
+			return false;
+		boolean result = false;
+		String sort1 = sort(s1);
+		String sort2 = sort(s2);
+		if(sort1.compareTo(sort2) == 0 ) {
+			result = true;
+		}
+		return result;
 	}
 
 	/**
@@ -36,8 +40,8 @@ public class Anagram {
 	}
 
 	/**
-	 * Sorts the input list using an insertion sort and the input
-	 * {@code Comparator} * object. *
+	 * Sorts the input list using an insertion sort and the input {@code Comparator}
+	 * * object. *
 	 * 
 	 * @param <T>   type of the element of the list
 	 * @param list  input list
@@ -51,16 +55,35 @@ public class Anagram {
 
 	/**
 	 * Returns a case-insensitive sorted version of the input String. For example,
-	 * if {@code str = "Utah"}, it returns {@code "ahtu"}. This sorting must be done
+	 * if {@code str = "Utah"}, it returns {@code "ahtu"}. This sorting is done
 	 * using insertion sort.
 	 * 
 	 * @param str string to be sorted
 	 * @return sorted string
 	 */
 	public static String sort(String str) {
-		return null;
+		String input = str.toLowerCase();
+		char[] arrayOfChars = new char[input.length()];
+		for(int i = 0; i < input.length(); i++) {
+			arrayOfChars[i] = input.charAt(i);
+		}
+		char temp = 0;
+		for(int i =0; i < arrayOfChars.length - 1; i++) {
+			for(int j = i + 1; j > 0; j--) {
+				if(arrayOfChars[j] < arrayOfChars[j - 1]) {
+					temp = arrayOfChars[j];
+					arrayOfChars[j] = arrayOfChars[j - 1];
+					arrayOfChars[j - 1] = temp;
+				}
+			}
+		}
+		String result = "";
+		for(int i = 0; i < arrayOfChars.length; i++) {
+			result += arrayOfChars[i];
+		}
+		return result;
 	}
-	
+
 	/**
 	 * Returns the largest group of anagrams in the input list of words, in no
 	 * particular order.
@@ -69,7 +92,8 @@ public class Anagram {
 	 * @return largest group of anagrams in {@code input}
 	 */
 	public static List<String> getLargestAnagramGroup(List<String> input) {
-		
+
 		return null;
 	}
+
 }
