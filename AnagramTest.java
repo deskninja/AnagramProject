@@ -13,6 +13,12 @@ import components.simplereader.SimpleReader1L;
 
 public class AnagramTest {
 
+	@Before
+	public void  setUp(){
+		List<String> list = new ArrayList<>();
+		
+	}
+	
 	@Test
 	public void testAreAnagrams() {
 		String s1 = "Caters";
