@@ -26,31 +26,10 @@ public class Anagram {
 		return list;
 	}
 	
-	private static <T> List<T> sortData(List<T> list, Comparator<? super T> order) {
-		
-		int currentIndex = 0;
-    	boolean postionFound = false;
-    	int compareIndex = 0;
-    	T temp = list.get(0);
-    	
-		while(currentIndex + 1 < list.size()) {
-    		postionFound = false;
-    		compareIndex = currentIndex;
-    		while(!postionFound) { //as long as the number is not sorted
-    			if(order.compare(list.get(compareIndex), list.get(compareIndex + 1)) <= 0) //if the next number is less than the last one
-    				postionFound = true;
-    			else { //swap the two values
-    				temp = list.get(compareIndex);
-    				list.set(compareIndex, list.get(compareIndex + 1));
-    				list.set(compareIndex + 1, temp);
-    				compareIndex--;
-    				if(compareIndex < 0)
-    					postionFound = true;
-    			}
-    		}
-    		currentIndex++;
-    	}
-		return list;
+	private static <T> void swapItems(int index, List<T> list){
+		T temp = list.get(index);
+		list.set(index, list.get(index + 1));
+		list.set(index + 1, temp);
 	}
 
 	/**
@@ -100,7 +79,26 @@ public class Anagram {
 	 * @modifies {@code list}
 	 */
 	public static <T> void insertionSort(List<T> list, Comparator<? super T> order) {
-		list = sortData(list, order);
+		int currentIndex = 0;
+    	boolean postionFound = false;
+    	int compareIndex = 0;
+    	T temp = list.get(0);
+    	
+		while(currentIndex + 1 < list.size()) {
+    		postionFound = false;
+    		compareIndex = currentIndex;
+    		while(!postionFound) { //as long as the number is not sorted
+    			if(order.compare(list.get(compareIndex), list.get(compareIndex + 1)) <= 0) //if the next number is less than the last one
+    				postionFound = true;
+    			else { //swap the two values
+    				swapItems(compareIndex, list);
+    				compareIndex--;
+    				if(compareIndex < 0)
+    					postionFound = true;
+    			}
+    		}
+    		currentIndex++;
+    	}
 	}
 
 	/**
