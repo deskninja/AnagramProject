@@ -10,8 +10,48 @@ import components.simplereader.SimpleReader1L;
 public class Anagram {
 	
 	
+	/**
+	 * @param filename
+	 * @return
+	 */
+	private static List<String> readFile(String filename){
+		SimpleReader file = new SimpleReader1L(filename);
+		List<String> list = new ArrayList<>();
+		String line = file.nextLine();
+		while (!file.atEOS()) {  
+			list.add(line);
+			line = file.nextLine();
+		}
+		file.close();
+		return list;
+	}
 	
-	
+	private static <T> List<T> sortData(List<T> list, Comparator<? super T> order) {
+		
+		int currentIndex = 0;
+    	boolean postionFound = false;
+    	int compareIndex = 0;
+    	T temp = list.get(0);
+    	
+		while(currentIndex + 1 < list.size()) {
+    		postionFound = false;
+    		compareIndex = currentIndex;
+    		while(!postionFound) { //as long as the number is not sorted
+    			if(order.compare(list.get(compareIndex), list.get(compareIndex + 1)) <= 0) //if the next number is less than the last one
+    				postionFound = true;
+    			else { //swap the two values
+    				temp = list.get(compareIndex);
+    				list.set(compareIndex, list.get(compareIndex + 1));
+    				list.set(compareIndex + 1, temp);
+    				compareIndex--;
+    				if(compareIndex < 0)
+    					postionFound = true;
+    			}
+    		}
+    		currentIndex++;
+    	}
+		return list;
+	}
 
 	/**
 	 * Reports whether the two input strings are anagrams of each other. *
@@ -44,14 +84,8 @@ public class Anagram {
 	 * @return largest group of anagrams in the input file
 	 */
 	public static List<String> getLargestAnagramGroup(String filename) {
-		SimpleReader file = new SimpleReader1L(filename);
 		List<String> list = new ArrayList<>();
-		String line = file.nextLine();
-		while(line != "") {
-			list.add(line);
-			line = file.nextLine();
-		}
-		file.close();
+		list = readFile(filename);
 		return list;
 	}
 
@@ -66,32 +100,7 @@ public class Anagram {
 	 * @modifies {@code list}
 	 */
 	public static <T> void insertionSort(List<T> list, Comparator<? super T> order) {
-		
-		int currentIndex = 0;
-    	boolean postionFound = false;
-    	int compareIndex = 0;
-    	T temp = list.get(0);
-    	
-    	while(currentIndex + 1 < list.size()) {
-    		postionFound = false;
-    		compareIndex = currentIndex;
-    		while(!postionFound) { //as long as the number is not sorted
-//    			if(list.get(compareIndex) < arr[compareIndex + 1]) //if the next number is less than the last one
-//    				postionFound = true;
-    			if(order.compare(list.get(compareIndex), list.get(compareIndex)) < 0) {
-    				
-    			}
-    			else { //swap the two values
-    				temp = list.get(compareIndex);
-    				list.set(compareIndex, list.get(compareIndex + 1));
-    				list.set(compareIndex + 1, temp);
-    				compareIndex--;
-    				if(compareIndex < 0)
-    					postionFound = true;
-    			}
-    		}
-    		currentIndex++;
-    	    }
+		list = sortData(list, order);
 	}
 
 	/**
@@ -104,23 +113,18 @@ public class Anagram {
 	 */
 	public static String sort(String str) {
 		String input = str.toLowerCase();
-		char[] arrayOfChars = new char[input.length()];
+		List<String> chars = new ArrayList<>(str.length()); //create an ArrayList of chars for the insertionSort
+		System.out.println(input.substring(0, 0));
 		for(int i = 0; i < input.length(); i++) {
-			arrayOfChars[i] = input.charAt(i);
+			chars.add(i, input.substring(i, i + 1));
 		}
-		char temp = 0;
-		for(int i =0; i < arrayOfChars.length - 1; i++) {
-			for(int j = i + 1; j > 0; j--) {
-				if(arrayOfChars[j] < arrayOfChars[j - 1]) {
-					temp = arrayOfChars[j];
-					arrayOfChars[j] = arrayOfChars[j - 1];
-					arrayOfChars[j - 1] = temp;
-				}
-			}
-		}
+		System.out.println(chars.toString());
+		
+		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);}; //create the comparator (lambda)
+		insertionSort(chars, order);
 		String result = "";
-		for(int i = 0; i < arrayOfChars.length; i++) {
-			result += arrayOfChars[i];
+		for(String character: chars) {
+			result += character;
 		}
 		return result;
 	}
@@ -139,6 +143,7 @@ public class Anagram {
 	
 	public static void main(String[] args) {
 		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);};
+		readFile("data/words.txt");
 	}
 
 }
