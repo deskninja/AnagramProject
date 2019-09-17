@@ -1,9 +1,16 @@
 package assignment04;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import components.simplereader.SimpleReader;
+import components.simplereader.SimpleReader1L;
+
 public class Anagram {
+	
+	
+	
 	
 
 	/**
@@ -37,7 +44,15 @@ public class Anagram {
 	 * @return largest group of anagrams in the input file
 	 */
 	public static List<String> getLargestAnagramGroup(String filename) {
-		return null;
+		SimpleReader file = new SimpleReader1L(filename);
+		List<String> list = new ArrayList<>();
+		String line = file.nextLine();
+		while(line != "") {
+			list.add(line);
+			line = file.nextLine();
+		}
+		file.close();
+		return list;
 	}
 
 	/**
@@ -51,32 +66,7 @@ public class Anagram {
 	 * @modifies {@code list}
 	 */
 	public static <T> void insertionSort(List<T> list, Comparator<? super T> order) {
-		
-		int currentIndex = 0;
-    	boolean postionFound = false;
-    	int compareIndex = 0;
-    	T temp = list.get(0);
-    	
-    	while(currentIndex + 1 < list.size()) {
-    		postionFound = false;
-    		compareIndex = currentIndex;
-    		while(!postionFound) { //as long as the number is not sorted
-//    			if(list.get(compareIndex) < arr[compareIndex + 1]) //if the next number is less than the last one
-//    				postionFound = true;
-    			if(order.compare(list.get(compareIndex), list.get(compareIndex)) < 0) {
-    				
-    			}
-    			else { //swap the two values
-    				temp = list.get(compareIndex);
-    				list.set(compareIndex, list.get(compareIndex + 1));
-    				list.set(compareIndex + 1, temp);
-    				compareIndex--;
-    				if(compareIndex < 0)
-    					postionFound = true;
-    			}
-    		}
-    		currentIndex++;
-    	}
+
 	}
 
 	/**
@@ -118,14 +108,12 @@ public class Anagram {
 	 * @return largest group of anagrams in {@code input}
 	 */
 	public static List<String> getLargestAnagramGroup(List<String> input) {
-		
+
 		return null;
 	}
 	
 	public static void main(String[] args) {
 		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);};
-		
-		
 	}
 
 }
