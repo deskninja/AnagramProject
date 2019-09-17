@@ -51,12 +51,23 @@ public class AnagramTest {
 	public void getLargestAnagramGroupReadFileTest() {
 		List <String> list = new ArrayList<>();
 		list = Anagram.getLargestAnagramGroup("data/words.txt");
-		System.out.println(list.toString());
+		list.get(0);
 	}
 	
 	@Test
-	public void testSortMethod() {
-		
+	public void getLargestAnagramGroupStringInputTest() {
+		List <String> list = new ArrayList<>();
+		List <String> compare = new ArrayList<>(
+			List.of("Caters", 
+					"caster", 
+					"crates", 
+					"Reacts", 
+					"recast", 
+					"traces"
+					));
+		list = Anagram.getLargestAnagramGroup("data/words.txt");
+		list = Anagram.getLargestAnagramGroup(list);
+		//assertEquals(compare, list);
+		System.out.println(list.toString());
 	}
-	
 }
