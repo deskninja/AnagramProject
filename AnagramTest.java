@@ -2,6 +2,8 @@ package assignment04;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,11 +15,10 @@ import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 
 public class AnagramTest {
+	
 
 	@Before
-	public void  setUp(){
-		List<String> list = new ArrayList<>();
-		
+	public void  setUp() {
 	}
 	
 	@Test
@@ -47,15 +48,15 @@ public class AnagramTest {
 	}
 	
 	@Test
-	public void testGetLargestAnagramGroup() {
-		SimpleReader f1 = new SimpleReader1L("/Assignment04-Anagrams/Test/sudoku1.txt");
-		Set<String> result = new Set1L<>();
-		for(int i = 0; i < 9; i++) {
-			result.add(f1.nextLine());
-		}
-		f1.close();
-		List<String> input = Anagram.getLargestAnagramGroup("/Assignment04-Anagrams/Test/sudoku1.txt");
-		assertEquals(result, input);
+	public void getLargestAnagramGroupReadFileTest() {
+		List <String> list = new ArrayList<>();
+		list = Anagram.getLargestAnagramGroup("data/words.txt");
+		System.out.println(list.toString());
 	}
-
+	
+	@Test
+	public void testSortMethod() {
+		
+	}
+	
 }
