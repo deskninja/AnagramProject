@@ -10,6 +10,38 @@ import components.simplereader.SimpleReader1L;
 public class Anagram {
 	
 	
+	private static List<Integer> anagram(List<String> list){
+		List<Integer> mostAnagramIndexes = new ArrayList<>();
+		List<Integer> nextAnagramIndexes = new ArrayList<>();
+		String currentAnagram = list.get(0);
+		nextAnagramIndexes.add(0);
+		
+		int index = 0;
+		while(index + 1 < list.size()) {
+			while(index + 1 < list.size() && areAnagrams(currentAnagram, list.get(index + 1))) { //while on the current anagram
+				nextAnagramIndexes.add(index + 1);
+				index++;
+			}
+			if(nextAnagramIndexes.size() > mostAnagramIndexes.size()) {
+				mostAnagramIndexes.clear();
+				for(Integer i: nextAnagramIndexes) {
+					mostAnagramIndexes.add(i);
+				}
+			}
+			nextAnagramIndexes.clear();
+			nextAnagramIndexes.add(index);
+			if(index + 1 < list.size()) {
+				currentAnagram = list.get(index);
+				if(!areAnagrams(currentAnagram, list.get(index + 1)))
+					index++;
+					currentAnagram = list.get(index);
+					nextAnagramIndexes.clear();
+					nextAnagramIndexes.add(index);
+			}
+		}
+		return mostAnagramIndexes;
+	}
+	
 	/**
 	 * @param filename
 	 * @return
@@ -30,6 +62,73 @@ public class Anagram {
 		T temp = list.get(index);
 		list.set(index, list.get(index + 1));
 		list.set(index + 1, temp);
+
+	}
+	
+	private static void swapItems(int index, int[] list){
+		int temp = list[index];
+		list[index] = list[index + 1];
+		list[index + 1] = temp;
+	}
+	
+	/**
+	 * @param list
+	 * @param order
+	 * @return
+	 */
+	private static <T> List<T> sortData(List<T> list, Comparator<? super T> order) {
+		
+		int currentIndex = 0;
+    	boolean postionFound = false;
+    	int compareIndex = 0;
+    	
+		while(currentIndex + 1 < list.size()) {
+    		postionFound = false;
+    		compareIndex = currentIndex;
+    		while(!postionFound) { //as long as the number is not sorted
+    			if(order.compare(list.get(compareIndex), list.get(compareIndex + 1)) <= 0) //if the next number is less than the last one
+    				postionFound = true;
+    			else { //swap the two values
+    				swapItems(compareIndex, list);
+    				compareIndex--;
+    				if(compareIndex < 0)
+    					postionFound = true;
+    			}
+    		}
+    		currentIndex++;
+    	}
+		return list;
+	}
+	
+
+	/**
+	 * @param list
+	 * @param order
+	 * @param indexes
+	 * @return
+	 */
+	private static <T> List<T> sortData(List<T> list, Comparator<? super T> order, int[] indexes){
+		int currentIndex = 0;
+    	boolean postionFound = false;
+    	int compareIndex = 0;
+    	
+		while(currentIndex + 1 < list.size()) {
+    		postionFound = false;
+    		compareIndex = currentIndex;
+    		while(!postionFound) { //as long as the number is not sorted
+    			if(order.compare(list.get(compareIndex), list.get(compareIndex + 1)) <= 0) //if the next number is less than the last one
+    				postionFound = true;
+    			else { //swap the two values
+    				swapItems(compareIndex, list);
+    				swapItems(compareIndex, indexes);
+    				compareIndex--;
+    				if(compareIndex < 0)
+    					postionFound = true;
+    			}
+    		}
+    		currentIndex++;
+    	}
+		return list;
 	}
 
 	/**
@@ -65,6 +164,7 @@ public class Anagram {
 	public static List<String> getLargestAnagramGroup(String filename) {
 		List<String> list = new ArrayList<>();
 		list = readFile(filename);
+		list = getLargestAnagramGroup(list);
 		return list;
 	}
 
@@ -112,11 +212,11 @@ public class Anagram {
 	public static String sort(String str) {
 		String input = str.toLowerCase();
 		List<String> chars = new ArrayList<>(str.length()); //create an ArrayList of chars for the insertionSort
-		System.out.println(input.substring(0, 0));
+		
 		for(int i = 0; i < input.length(); i++) {
 			chars.add(i, input.substring(i, i + 1));
 		}
-		System.out.println(chars.toString());
+		
 		
 		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);}; //create the comparator (lambda)
 		insertionSort(chars, order);
@@ -135,13 +235,29 @@ public class Anagram {
 	 * @return largest group of anagrams in {@code input}
 	 */
 	public static List<String> getLargestAnagramGroup(List<String> input) {
-
-		return null;
+		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);};
+		List<String> largestAnagramGroup = new ArrayList<>();
+		List<String> sortedList = new ArrayList<>();
+		for(String item: input) {
+			sortedList.add(sort(item)); //create a list of sorted elements
+		}
+		
+		int[] indexes = new int[input.size()]; //track the indexes of each anagram
+		for(int i = 0; i < indexes.length; i++) {
+			indexes[i] = i;
+		}
+		List<Integer> indexOfAnagrams = new ArrayList<>();
+		sortData(sortedList, order, indexes);
+		indexOfAnagrams = anagram(sortedList);
+		for(Integer i: indexOfAnagrams) {
+			largestAnagramGroup.add(input.get(indexes[i]));
+		}
+		
+		return largestAnagramGroup;
 	}
 	
 	public static void main(String[] args) {
-		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);};
-		readFile("data/words.txt");
+		getLargestAnagramGroup("data/words.txt");
 	}
 
 }
