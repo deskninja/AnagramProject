@@ -1,18 +1,11 @@
 package assignment04;
 
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import components.set.Set;
-import components.set.Set1L;
-import components.simplereader.SimpleReader;
-import components.simplereader.SimpleReader1L;
 
 public class AnagramTest {
 	
@@ -50,7 +43,7 @@ public class AnagramTest {
 	@Test
 	public void getLargestAnagramGroupReadFileTest() {
 		List <String> list = new ArrayList<>();
-		list = Anagram.getLargestAnagramGroup("data/words.txt");
+		list = Anagram.getLargestAnagramGroup("root/words.txt");
 		list.get(0);
 	}
 	
@@ -58,16 +51,48 @@ public class AnagramTest {
 	public void getLargestAnagramGroupStringInputTest() {
 		List <String> list = new ArrayList<>();
 		List <String> compare = new ArrayList<>(
-			List.of("Caters", 
+			List.of("carets", 
+					"Caters", 
 					"caster", 
 					"crates", 
 					"Reacts", 
-					"recast", 
-					"traces"
+					"recast"
 					));
-		list = Anagram.getLargestAnagramGroup("data/words.txt");
-		list = Anagram.getLargestAnagramGroup(list);
-		//assertEquals(compare, list);
-		System.out.println(list.toString());
+		list = Anagram.getLargestAnagramGroup("root/words.txt");
+		assertEquals(compare, list);
 	}
+	
+	@Test
+	public void getLargestAnagramGroupStringInputTestModerateList() {
+		List <String> list = new ArrayList<>();
+		List <String> compare = new ArrayList<>(
+			List.of("act",
+					"cat"
+					));
+		list = Anagram.getLargestAnagramGroup("root/moderate_word_list.txt");
+		assertEquals(compare, list);
+	}
+	
+	@Test
+	public void getLargestAnagramGroupStringInputTestDictionary() {
+		List <String> list = new ArrayList<>();
+		List <String> compare = new ArrayList<>(
+			List.of("apers",
+					"apres",
+					"asper",
+					"pares",
+					"parse",
+					"pears",
+					"rapes",
+					"reaps",
+					"spare",
+					"spear"
+					));
+		list = Anagram.getLargestAnagramGroup("root/words_english.txt");
+		System.out.println(list.toString() + " list");
+		assertEquals(compare, list);
+	}
+	
+	
+	
 }
