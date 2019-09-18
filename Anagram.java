@@ -10,6 +10,11 @@ import components.simplereader.SimpleReader1L;
 public class Anagram {
 	
 	
+	/**
+	 * 
+	 * @param list
+	 * @return
+	 */
 	private static List<Integer> anagram(List<String> list){
 		List<Integer> mostAnagramIndexes = new ArrayList<>();
 		List<Integer> nextAnagramIndexes = new ArrayList<>();
@@ -43,8 +48,9 @@ public class Anagram {
 	}
 	
 	/**
-	 * @param filename
-	 * @return
+	 * Pulls the words from the file and puts them into a list.
+	 * @param filename being read.
+	 * @return list of words.
 	 */
 	private static List<String> readFile(String filename){
 		SimpleReader file = new SimpleReader1L(filename);
@@ -58,6 +64,12 @@ public class Anagram {
 		return list;
 	}
 	
+	/**
+	 * Swaps T elements to their corresponding location.
+	 * @param <T> Generic type.
+	 * @param index of list.
+	 * @param list of T elements.
+	 */
 	private static <T> void swapItems(int index, List<T> list){
 		T temp = list.get(index);
 		list.set(index, list.get(index + 1));
@@ -65,6 +77,11 @@ public class Anagram {
 
 	}
 	
+	/**
+	 * Swaps integers to their corresponding location.
+	 * @param index of list.
+	 * @param list of integers.
+	 */
 	private static void swapItems(int index, int[] list){
 		int temp = list[index];
 		list[index] = list[index + 1];
@@ -102,10 +119,11 @@ public class Anagram {
 	
 
 	/**
-	 * @param list
-	 * @param order
-	 * @param indexes
-	 * @return
+	 * Ensures that the list is sorted. This is done by insertion sort.
+	 * @param list of T elements that need sorting.
+	 * @param order Comparator that uses a comparable to ensure proper placement.
+	 * @param indexes Array of locations that the list of T elements are in.
+	 * @return A sorted list of T elements.
 	 */
 	private static <T> List<T> sortData(List<T> list, Comparator<? super T> order, int[] indexes){
 		int currentIndex = 0;
