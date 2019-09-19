@@ -89,10 +89,25 @@ public class AnagramTest {
 					"spear"
 					));
 		list = Anagram.getLargestAnagramGroup("root/words_english.txt");
-		System.out.println(list.toString() + " list");
 		assertEquals(compare, list);
 	}
 	
-	
-	
+	@Test
+	public void getLargestAnagramGroupFirstTwentyInModerateArray() {
+		List <String> list = new ArrayList<>();
+		List <String> compare = new ArrayList<>(
+			List.of("apers",
+					"apres",
+					"asper",
+					"pares",
+					"parse",
+					"pears",
+					"rapes",
+					"reaps",
+					"spare",
+					"spear"
+					));
+		list = Anagram.getLargestAnagramGroup("root/firstTwenty.txt");
+		assertEquals(compare, list);
+	}
 }
