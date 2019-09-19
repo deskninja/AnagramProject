@@ -1,3 +1,4 @@
+
 package assignment04;
 
 import java.util.ArrayList;
@@ -12,6 +13,12 @@ import components.simplereader.SimpleReader1L;
  * This class takes a file of words and returns the largest group of anagrams
  */
 public class Anagram {
+	
+	//lambda expression that compares two strings 
+	private static Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);};
+	//lambda expression that sorts and compares two strings
+	private static Comparator<String> sortedOrder = (s1, s2) -> {return sort(s1).compareTo(sort(s2));};
+
 	
 	/**
 	 * @param words
@@ -112,6 +119,11 @@ public class Anagram {
 	public static List<String> getLargestAnagramGroup(String filename) {
 		List<String> list = new ArrayList<>();
 		list = readFile(filename);
+		
+		if(list.size() < 2) { //if there are no anagrams or just one word
+			return list;
+		}
+			
 		list = getLargestAnagramGroup(list);
 		return list;
 	}
@@ -165,7 +177,6 @@ public class Anagram {
 			chars.add(i, input.substring(i, i + 1));
 		}
 		
-		Comparator<String> order = (s1, s2) -> {return s1.compareTo(s2);}; //create the comparator (lambda)
 		insertionSort(chars, order);
 		String result = "";
 		for(String character: chars) {
@@ -182,14 +193,13 @@ public class Anagram {
 	 * @return largest group of anagrams in {@code input}
 	 */
 	public static List<String> getLargestAnagramGroup(List<String> input) {
-		Comparator<String> order = (s1, s2) -> {return sort(s1).compareTo(sort(s2));};
 		List<String> words = new ArrayList<>();
 		//copy input to a new array
 		for(String i: input) {
 			words.add(i);
 		}
 		//sort the array in terms of anagrams
-		insertionSort(words, order);
+		insertionSort(words, sortedOrder);
 		System.out.println("sorted");
 		//return the largest anagram group in the list
 		return largestAnagramList(words);
