@@ -32,15 +32,19 @@ public class Anagram {
 		String currentAnagram = sort(words.get(index));
 		
 		while(index < words.size()) {
+			
+			//check if the current word is an anagram
 			if(areAnagrams(words.get(index), currentAnagram))
 				currentAnagramSize++;
+			
+			//If this word is not an anagram
 			else {
 				currentStartIndex = index;
 				currentAnagramSize = 1;
 				currentAnagram = sort(words.get(index));
 			}
 				
-			
+			//If this is the new largest anagram
 			if(currentAnagramSize > largestAnagramSize) {
 				largestAnagramSize = currentAnagramSize;
 				largestAnagramStartIndex = currentStartIndex;
