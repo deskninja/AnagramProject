@@ -1,4 +1,3 @@
-
 package assignment04;
 
 import java.util.ArrayList;
@@ -21,8 +20,8 @@ public class Anagram {
 
 	
 	/**
-	 * @param words
-	 * @return
+	 * This method returns every word of the largest list of anagrams
+	 * @return String List list of each anagram word of the largest group of anagrams
 	 */
 	private static List<String> largestAnagramList(List<String> words){
 		int index = 0;
@@ -200,7 +199,7 @@ public class Anagram {
 		}
 		//sort the array in terms of anagrams
 		insertionSort(words, sortedOrder);
-		System.out.println("sorted");
+		
 		//return the largest anagram group in the list
 		return largestAnagramList(words);
 	}
