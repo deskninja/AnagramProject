@@ -7,6 +7,10 @@ import java.util.List;
 import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 
+/*
+* @author Joshua Wells
+*/
+
 public class Anagram {
 	
 	
